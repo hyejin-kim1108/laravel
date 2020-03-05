@@ -66,7 +66,7 @@ class RegisterController extends Controller
         }
 
         //이메일 중복조회
-        if($email_data==$email)W
+        if($email_data==$email)
         {
             Alert::error('실패','중복된 이메일 입니다.');
             return redirect()->back();
