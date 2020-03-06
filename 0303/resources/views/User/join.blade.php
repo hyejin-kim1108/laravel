@@ -8,7 +8,7 @@
 <body>
     <form name="Join" method="POST">
         {{ csrf_field() }}
-        <input type="text" name="name" value="{{old('name')}}" placeholder="name">이름<br>
+        <input type="text" name="name" value="{{old('name')}}" placeholder="name">사용할 별명<br>
         <input type="text" name="id" value="{{old('id')}}" placeholder="id">아이디<br>
         <input type="password" name="password" placeholder="비밀번호는 최소 4자리">비밀번호<br>
         <input type="email" name="email" value="{{old('email')}}" placeholder="email">이메일<br>

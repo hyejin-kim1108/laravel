@@ -1,10 +1,8 @@
 <?php
-
-session_start();
-
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,16 +25,7 @@ Route::get('/join', function(){
 Route::get('/login',function(){
     return view('User\login');
 });
-Route::get('/list',function(Request $request){
-    if(session('id'))
-    {return view('List.list');}
-
-    if(!session('id'))
-    {
-        Alert::error('실패','로그인이 안되었습니다. 다시해주세요');
-        return redirect('/');
-    }
-});
+Route::get('/list','Auth\ListPageController@index');
 Route::get('/logout', 'Auth\LoginController@destroy');
 
 //유저관련 지정했던 부분들
@@ -44,7 +33,6 @@ Route::post('join','Auth\RegisterController@store');
 Route::post('login','Auth\LoginController@store')->name('login.store');
 
 //리스트 관련 지정했던 부분들
-
 //미들웨어 관리
 //Route::get('/login','Auth\LoginController@store')->middleware('LoginMiddleware');
 

@@ -89,9 +89,12 @@ class RegisterController extends Controller
             ]);
 
             $user->save;
+            $request->session()->put('name','$name');
+            $request->session()->put('id','$id');
             Alert::success('회원가입완료','해당 아이디로 로그인해주세요');
             return redirect('/');
         }
+
 
     }
     /**

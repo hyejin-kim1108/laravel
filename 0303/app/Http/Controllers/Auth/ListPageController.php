@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class ListPageController extends Controller
 {
@@ -15,9 +16,32 @@ class ListPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {    
+      /*  if(!session('id'))
+        {
+            Alert::error('실패','로그인이 안되었습니다. 다시해주세요');
+            return redirect('/');
+        }
+
+        if(session('id'))
+        {
+        $id=session()->get('id');
+        //$id_data=$request->input($id);
+        $name_data=DB::table('users')->where('id','test1-1')->select('name')->get('');
+
+        return view('List.list',$name_data);
+
+        }*/
+
+        if ( ! session('id'))  {
+            Alert::error('실패','로그인이 안되었습니다. 다시해주세요');
+            return redirect('/');
+        }
+        
+        $id = session()->get('id');
+        $nameData = DB::table('users')->where('id', $id)->firstOrFail();
+        return view('list.list', compact('nameData'));
     }
 
     /**
@@ -25,10 +49,14 @@ class ListPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function create()
     {
         return view('List.list');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -49,14 +77,9 @@ class ListPageController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $id=$request->session()->get('id');
-        $name=$request->session()->get('name');
+        $id=Session()->get('id');
+        $name_data=DB::table('users')->where('id',$id)->value('name');
 
-        if(!session())
-        {
-            Alert::warning('접근불가','로그인을 해주세요.');
-            redirect('/');
-        }
 
     }
 
