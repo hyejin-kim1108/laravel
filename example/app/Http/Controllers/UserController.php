@@ -97,16 +97,6 @@ class UserController extends Controller
             Alert::success('회원가입완료','해당 아이디로 로그인해주세요');
             return redirect('/');
         }
-
-        //빈칸 지정부분
-        /*if(empty($user))
-        {
-            Alert::question('실패','빈칸을 확인해주세요');
-            return redirect()->back();
-        }*/
-
-        Alert::success('회원가입완료','해당 아이디로 로그인해주세요');
-        return redirect('/List');
     }
 
     /**
@@ -149,13 +139,6 @@ class UserController extends Controller
             'password'=>'min:4',
         ]);
 
-        /*DB::table('users')
-            ->where('user_id','=',$user_id)
-            ->updateOrInsert(
-                    ['name'->$input['name']],
-                    ['password'->bcrypt($input['password'])],
-                    ['email'->$input['email']],
-                    );*/
         $user_update=DB::table('users')->where('user_id',$user_id)
                     ->update(array(
                             'name'=>$input['name'],
@@ -164,13 +147,7 @@ class UserController extends Controller
                     ));
         Alert::success('완료','회원정보 수정이 완료되었습니다.');
         return redirect('/');
-        //$id_data=DB::table('users')->where('user_id','=',$user_id)->select('id');
 
-        /*if($id_data!=$input['id'])
-        {
-            Alert::error('실패','사용중이신 아이디와 다릅니다. 입력하신 내용을 확인해주세요');
-            return redirect()->back();
-        }*/
     }
 
     /**
@@ -181,14 +158,11 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        //dd();
         $user_id=Auth::user()->user_id;
-        //dd($user_id);
 
         switch($request->input('button'))
         {
             case 'Yes_Click' :
-                //dd($id);
                 DB::table('users')->where('user_id','=',$user_id)->delete();
                 Alert::success('완료','회원탈퇴가 처리되었습니다.');
                 return redirect('/');
