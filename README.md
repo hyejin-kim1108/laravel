@@ -9,14 +9,14 @@
 개발환경 
 ---
   Front-End
-    1. Html
-    2. TailWind 
+    1.Html
+    2.TailWind 
 
   Back-End
-    1. PHP 7.4.2
-    2. LARAVEL 6.x
-    3. MySQL 6 
-    4. PhpMyAdmin(주소:)
+    1.PHP 7.4.2
+    2.LARAVEL 6.x
+    3.MySQL 6 
+    4.PhpMyAdmin(주소:)
 
 ***
 
