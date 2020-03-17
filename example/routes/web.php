@@ -28,6 +28,7 @@ Route::post('/Register','UserController@store');
 Route::post('/Login', 'LoginController@store');
 Route::post('/UpdateUser','UserController@update');
 Route::post('/Signout','UserController@destroy');
+Route::post('File_Upload','FileUpLoadController@store');
 
 //삭제관련
 Route::get('/Logout',function(){
