@@ -6,15 +6,15 @@
   *Auth를 중점적으로 이용한 프로젝트
 
 ## 개발환경
-  *Front-End
-    +Html
-    +TailWind
+  * Front-End
+    + Html
+    + TailWind
 
-  *Back-End
-    +PHP 7.4.2
-    +LARAVEL 6.x
-    +MySQL 6 
-    +PhpMyAdmin(주소:)
+  * Back-End
+    + PHP 7.4.2
+    + LARAVEL 6.x
+    + MySQL 6 
+    + PhpMyAdmin(Link:)
 
 ***
 
