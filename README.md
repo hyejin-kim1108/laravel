@@ -3,14 +3,14 @@
 
 **목적**
 ---
-  *라라벨 CRUD 적용 
-  *Auth를 중점적으로 이용한 프로젝트 
+  *라라벨 CRUD 적용
+  *Auth를 중점적으로 이용한 프로젝트
 
 **개발환경**
 ---
   *Front-End
     1.Html
-    2.TailWind 
+    2.TailWind
 
   *Back-End
     1.PHP 7.4.2
