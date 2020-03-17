@@ -1,18 +1,18 @@
 라라벨(Laravel) - 개인 프로젝트 
 ---
 
-목적 
+**목적**
 ---
-  1. 라라벨 CRUD 적용 
-  2. Auth를 중점적으로 이용한 프로젝트 
+  *라라벨 CRUD 적용 
+  *Auth를 중점적으로 이용한 프로젝트 
 
-개발환경 
+**개발환경**
 ---
-  Front-End
+  *Front-End
     1.Html
     2.TailWind 
 
-  Back-End
+  *Back-End
     1.PHP 7.4.2
     2.LARAVEL 6.x
     3.MySQL 6 
