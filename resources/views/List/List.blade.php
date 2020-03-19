@@ -13,7 +13,7 @@
         </div>
     </div>
     <hr><br>
-    <form name="File_Upload" method="POST" enctype="multipart/form-data">
+<form name="File_Upload" method="POST" enctype="multipart/form-data" action ="{{route('File_Upload')}}">
         {{ csrf_field() }}
         <label for="file">파일</label><br>
         <b>전송가능한 파일 확장자는 png,jpg,zip 입니다</b><br>
@@ -22,4 +22,5 @@
     </form>
      <script src="/js/app.js"></script>
     </body>
+    @include('sweetalert::alert')
 </html>
