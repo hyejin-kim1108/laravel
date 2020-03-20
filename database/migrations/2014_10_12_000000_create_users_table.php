@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('user_id')->index();
+            $table->bigIncrements('user_id')->unsigned();
             $table->string('name');
             $table->string('id')->uniqid();
             $table->string('password');
@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

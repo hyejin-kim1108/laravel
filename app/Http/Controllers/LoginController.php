@@ -57,6 +57,7 @@ class LoginController extends Controller
 
        if($validator->fails())
         {
+            $file=\App\User::create([]);
             Alert::error('재확인요망','빈칸이 있습니다.');
             return redirect('/Login')->withErrors($validator)->withInput();
         }
