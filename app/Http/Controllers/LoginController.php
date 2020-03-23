@@ -8,6 +8,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\Console\Input\Input;
 
 class LoginController extends Controller
 {
@@ -55,6 +57,7 @@ class LoginController extends Controller
             'password'=>'required|min:4',
         ]);
 
+
        if($validator->fails())
         {
             $file=\App\User::create([]);
@@ -67,10 +70,10 @@ class LoginController extends Controller
             Alert::error('재입력요망','아이디나 비밀번호가 틀립니다.');
             return redirect()->back();
         }
-        else
+        if(Auth::attempt(['id' => $id, 'password' => $password]))
         {
             Alert::success('성공','로그인이 완료되었습니다.');
-            return redirect()->intended('/');
+            return redirect('/');
         }
     }
     /**

@@ -11,6 +11,8 @@
 
         <button type="submit" name="전송">입력완료</button>
     </form>
+        <a href="/"><button name="Main_Return">메인으로</button></a>
+        <a href="/Register"><button name="Join_click">회원가입으로</button>
     </body>
     @include('sweetalert::alert')
 </html>

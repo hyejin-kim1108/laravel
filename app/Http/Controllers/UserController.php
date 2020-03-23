@@ -164,6 +164,7 @@ class UserController extends Controller
         {
             case 'Yes_Click' :
                 DB::table('users')->where('user_id','=',$user_id)->delete();
+
                 Alert::success('완료','회원탈퇴가 처리되었습니다.');
                 return redirect('/');
             break;

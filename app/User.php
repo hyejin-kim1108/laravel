@@ -35,8 +35,5 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'activated' => 'boolean',
-    ];
 
 }

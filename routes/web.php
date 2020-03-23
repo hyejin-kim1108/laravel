@@ -16,12 +16,21 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 //단순 사이트 이동 && get으로 받은 것들
-Route::get('/', function () {return view('User.Main');});
+Route::get('/', function () {
+    return view('User.Main');});
 Route::get('/Register', function () {return view('User.Register');});
 Route::get('/Login', function () {return view('User.Login');});
-Route::get('/List', function () {return view('List.List');});
+Route::get('/List', function () {
+    return view('List.List');
+    if (!Auth::check())
+    {
+        Alert::error('접근불가','로그인을 다시 해주세요');
+        return view('User.Main');
+    }
+});
 Route::get('/UpdateUser','UserController@UpdateIndex');
 Route::get('/Signout', function() {return view('User.Signout');});
+
 
 //Post
 Route::post('/Register','UserController@store');
