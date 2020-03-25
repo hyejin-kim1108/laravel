@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class UserController extends Controller
 {
@@ -65,7 +66,7 @@ class UserController extends Controller
         if($validator->fails())
         {
             Alert::error('재확인요망','빈칸이 있습니다.');
-            return redirect('/Login')->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $id_data=DB::table('users')->where('id',$input['id'])->exists();
@@ -75,14 +76,14 @@ class UserController extends Controller
         if($id_data==$input['id'])
         {
             Alert::error('실패','중복된 아이디 입니다.');
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         //이메일 중복조회
         if($email_data==$input['email'])
         {
             Alert::error('실패','중복된 이메일 입니다.');
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         else
@@ -107,7 +108,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -131,7 +132,9 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user_id=Auth::user()->user_id;
-        $user=User::find($user_id);
+        $id=Session::get('id');
+
+        $user=User::find($id);
 
         $input=$request->all();
 
@@ -139,11 +142,9 @@ class UserController extends Controller
             'password'=>'min:4',
         ]);
 
-        $user_update=DB::table('users')->where('user_id',$user_id)
+        $user_update=DB::table('users')->where('id',$id)
                     ->update(array(
-                            'name'=>$input['name'],
                             'password'=>$input['password'],
-                            'email'=>$input['email'],
                     ));
         Alert::success('완료','회원정보 수정이 완료되었습니다.');
         return redirect('/');

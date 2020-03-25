@@ -17,9 +17,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 //단순 사이트 이동 && get으로 받은 것들
 Route::get('/', function () {
-    return view('User.Main');});
+    return view('User.Main');
+});
 Route::get('/Register', function () {return view('User.Register');});
-Route::get('/Login', function () {return view('User.Login');});
+Route::get('/Login', function() {return view('User.Login');})->name('Login');
 Route::get('/List', function () {
     return view('List.List');
     if (!Auth::check())
@@ -37,7 +38,7 @@ Route::post('/Register','UserController@store');
 Route::post('/Login', 'LoginController@store');
 Route::post('/UpdateUser','UserController@update');
 Route::post('/Signout','UserController@destroy');
-Route::post('/List','FileUpLoadController@store')->name('File_Upload');
+Route::post('/List','FileUpLoadController@store');
 
 //삭제관련
 Route::get('/Logout',function(){

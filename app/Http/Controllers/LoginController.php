@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
+use Symfony\Component\HttpFoundation\Session\Session;
+use App\User;
+use Illuminate\Auth\Authenticatable;
 
 class LoginController extends Controller
 {
@@ -20,6 +23,13 @@ class LoginController extends Controller
      */
 
     protected $redirectTo='/';
+
+    use Authenticatable;
+
+    public function username()
+    {
+        return 'id';
+    }
 
     public function __construct()
     {
@@ -49,32 +59,39 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $input=$request->all();
-        $id=$input['id'];
-        $password=$input['password'];
 
-        $validator=validator::make($request->all(),[
+        /*$credentials = $request->only('id', 'password');*/
+
+        $validator=validator($request->all(),[
             'id'=>'required',
             'password'=>'required|min:4',
         ]);
 
-
        if($validator->fails())
         {
-            $file=\App\User::create([]);
             Alert::error('재확인요망','빈칸이 있습니다.');
             return redirect('/Login')->withErrors($validator)->withInput();
         }
 
-        if(! auth()->attempt(array('id'=>$id,'password'=>$password)))
+        $UserData=array(
+            $id='id'=>$input['id'],
+            $password='password'=>$input['password']
+        );
+
+        $user=User::find(1);
+
+        if(Auth::login($user))
+        {
+            Alert::success('성공','로그인이 완료되었습니다.');
+            return redirect('/')->with($id);
+        }
+
+        else
         {
             Alert::error('재입력요망','아이디나 비밀번호가 틀립니다.');
             return redirect()->back();
         }
-        if(Auth::attempt(['id' => $id, 'password' => $password]))
-        {
-            Alert::success('성공','로그인이 완료되었습니다.');
-            return redirect('/');
-        }
+
     }
     /**
      * Display the specified resource.
@@ -84,7 +101,7 @@ class LoginController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -120,6 +137,7 @@ class LoginController extends Controller
     {
 
         Alert::success('완료','로그아웃이 완료 되었습니다. 바이바이!');
+        $request->session()->invalidate();
         return redirect('/');
     }
 }

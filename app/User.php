@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Symfony\Component\HttpFoundation\Request;
 
-class User extends Authenticatable
+class User extends Model implements Authenticatable
 {
     use Notifiable;
+    use Authenticatable;
 
     protected $table='users';
     /**

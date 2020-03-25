@@ -9,9 +9,9 @@ class Attachment extends Model
 {
     protected $table='fileattachment';
 
-    protected $fillable=['filename','bytes','mime',];
+    protected $fillable=['Article_id','Article_text','filename','bytes','mime',];
 
-    protected $hidden=['user_id','Article_id'];
+    protected $hidden=['user_id'];
 
 
     public function article()

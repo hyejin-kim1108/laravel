@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
 use Closure;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Authenticate extends Middleware
 {
@@ -27,7 +28,7 @@ class Authenticate extends Middleware
         {
             return $next($request);
         }
-
+        Alert::success('완료','당신은 관리자입니다.');
         return redirect()->route('User.Main');
     }
 }

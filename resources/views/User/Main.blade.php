@@ -1,11 +1,12 @@
+@extends('layouts.Listlayout')
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    @section('header')
         <title>main</title>
-    </head>
-    <body>
+    @endsection
+
+    @section('body')
         <h3>메인 입니다.</h3>
+        <!--해당 부분은 로그인 유무로 판별하는 부분-->
             <b>아래 버튼을 누르면 각 화면으로 이동합니다.</b><br>
             @if(Auth::check())
                 <a href="/List"><button name="List_Click">게시판</button></a>
@@ -17,6 +18,12 @@
                 <a href="/Register"><button name="Register_Click">회원가입</button></a><br>
                 <a href="/Login"><button name="Login_Click">로그인</button></a>
             @endif
-    </body>
-    @include('sweetalert::alert')
-</html>
+        <!--리스트나오는 부분-->
+        <br><hr>
+        @if(Auth::check())
+        <br>
+        @include('List.FileAttach')
+        @endif
+        @dd(Auth::user());
+        <hr>
+    @endsection

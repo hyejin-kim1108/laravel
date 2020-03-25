@@ -4,7 +4,7 @@
         <title>login</title>
     </head>
     <body>
-    <form name="Login" method="POST">
+    <form name="Login" method="POST" action="{{route('Login')}}">
         {{ csrf_field() }}
         <input type="text" name="id" placeholder="id">ID<br>
         <input type="password" name="password" placeholder="password">password<br>
