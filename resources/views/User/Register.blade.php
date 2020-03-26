@@ -15,7 +15,9 @@
 
             <button type="submit" name="전송" onclick="store()">입력완료</button>
             <span class="text-danger">{{ $errors->first('submit') }}</span>
+            <input type="hidden" name="_mathod" value="PUT">
         </form>
+
         <a href="/"><button name="Main_Return">메인으로</button></a>
         @include('sweetalert::alert')
     </body>

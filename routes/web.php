@@ -39,6 +39,7 @@ Route::post('/Login', 'LoginController@store');
 Route::post('/UpdateUser','UserController@update');
 Route::post('/Signout','UserController@destroy');
 Route::post('/List','FileUpLoadController@store');
+Route::post('/', 'FileUpLoadController@store')->name('File_Upload');
 
 //삭제관련
 Route::get('/Logout',function(){

@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Symfony\Component\Console\Input\Input;
-use Symfony\Component\HttpFoundation\Session\Session;
-use App\User;
 use Illuminate\Auth\Authenticatable;
 
 class LoginController extends Controller
@@ -22,9 +16,9 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $redirectTo='/';
-
     use Authenticatable;
+
+    protected $redirectTo='/';
 
     public function username()
     {
@@ -73,17 +67,12 @@ class LoginController extends Controller
             return redirect('/Login')->withErrors($validator)->withInput();
         }
 
-        $UserData=array(
-            $id='id'=>$input['id'],
-            $password='password'=>$input['password']
-        );
-
-        $user=User::find(1);
-
-        if(Auth::login($user))
+        //if(Auth::login($user))
+        if(Auth::attempt(['id' => $input['id'], 'password' => $input['password']]))
         {
             Alert::success('성공','로그인이 완료되었습니다.');
-            return redirect('/')->with($id);
+            $request->session()->put('user', Auth::user());
+            return redirect('/');
         }
 
         else

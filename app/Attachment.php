@@ -19,6 +19,11 @@ class Attachment extends Model
         return $this->belongsTo(Article::class);
     }
 
+    public function file()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
+
 
     /*public function getBytesAttribute($value)
     {

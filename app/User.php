@@ -2,16 +2,15 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Symfony\Component\HttpFoundation\Request;
 
-class User extends Model implements Authenticatable
+class User extends Authenticatable
 {
     use Notifiable;
-    use Authenticatable;
+
+    protected $primaryKey='user_id';
 
     protected $table='users';
     /**
@@ -31,6 +30,7 @@ class User extends Model implements Authenticatable
     protected $hidden = [
         'user_id', 'confirm_code', 'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast to native types

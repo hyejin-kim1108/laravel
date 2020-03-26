@@ -4,7 +4,6 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         @yield('header')
     </head>
-
     <body>
         <div class="bg-pink-300 rounded">
             <div class="text-center">

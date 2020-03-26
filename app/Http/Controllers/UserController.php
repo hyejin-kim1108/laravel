@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -69,35 +70,16 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $id_data=DB::table('users')->where('id',$input['id'])->exists();
-        $email_data=DB::table('users')->where('email',$input['email'])->exists();
-
-        //아이디 중복조회
-        if($id_data==$input['id'])
-        {
-            Alert::error('실패','중복된 아이디 입니다.');
-            return redirect()->back()->withInput();
-        }
-
-        //이메일 중복조회
-        if($email_data==$input['email'])
-        {
-            Alert::error('실패','중복된 이메일 입니다.');
-            return redirect()->back()->withInput();
-        }
-
-        else
-        {
-            $user=\App\User::create([
+        $user=\App\User::create([
                 'name'=>$request->input('name'),
                 'id'=>$request->input('id'),
-                'password'=>bcrypt($request->input('password')),
+                'password'=>Hash::make($request->input('password')),
                 'email'=>$request->input('email'),
-            ]);
+        ]);
 
             Alert::success('회원가입완료','해당 아이디로 로그인해주세요');
             return redirect('/');
-        }
+
     }
 
     /**
