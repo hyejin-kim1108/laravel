@@ -8,7 +8,7 @@
         <div class="bg-pink-300 rounded">
             <div class="text-center">
                 @if(Auth::check())
-                    <h2 class="text-lg"> 아이디 : {{ Auth::user() }}</h2>
+                    <h2 class="text-lg"> 아이디 : {{ Auth::user()->id }}</h2>
                 @else
                     <h2 class="text-lg"> 로고로고로고</h2>
                 @endif
@@ -17,5 +17,4 @@
         @yield('body')
     </body>
     <script src="/js/app.js"></script>
-    @include('sweetalert::alert')
 </html>

@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +23,7 @@ Route::get('/', function () {
 Route::get('/Register', function () {return view('User.Register');});
 Route::get('/Login', function() {return view('User.Login');})->name('Login');
 Route::get('/List', function () {
-    return view('List.List');
+    return view('List.Viewarticle');
     if (!Auth::check())
     {
         Alert::error('접근불가','로그인을 다시 해주세요');
@@ -32,14 +33,15 @@ Route::get('/List', function () {
 Route::get('/UpdateUser','UserController@UpdateIndex');
 Route::get('/Signout', function() {return view('User.Signout');});
 
+Route::get('/List_View','ArticleController@index');
+
 
 //Post
-Route::post('/Register','UserController@store');
+Route::post('/Register', 'UserController@store');
 Route::post('/Login', 'LoginController@store');
 Route::post('/UpdateUser','UserController@update');
 Route::post('/Signout','UserController@destroy');
-Route::post('/List','FileUpLoadController@store');
-Route::post('/', 'FileUpLoadController@store')->name('File_Upload');
+Route::post('/List','ArticleController@store');
 
 //삭제관련
 Route::get('/Logout',function(){

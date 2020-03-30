@@ -78,7 +78,7 @@ class UserController extends Controller
         ]);
 
             Alert::success('회원가입완료','해당 아이디로 로그인해주세요');
-            return redirect('/');
+            return redirect()->intended('/');
 
     }
 

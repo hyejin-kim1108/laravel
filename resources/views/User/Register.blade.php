@@ -13,9 +13,8 @@
             <input type="password" name="password" placeholder="비밀번호는 최소 4자리">비밀번호<br>
             <input type="email" name="email" value="{{old('email')}}" placeholder="email">이메일<br>
 
-            <button type="submit" name="전송" onclick="store()">입력완료</button>
+            <button type="submit" name="전송">입력완료</button>
             <span class="text-danger">{{ $errors->first('submit') }}</span>
-            <input type="hidden" name="_mathod" value="PUT">
         </form>
 
         <a href="/"><button name="Main_Return">메인으로</button></a>
